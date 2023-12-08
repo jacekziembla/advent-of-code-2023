@@ -12,7 +12,7 @@ def get_card_value(card: str) -> int:
         "A": 14,
         "K": 13,
         "Q": 12,
-        "J": 11,
+        "J": 0,
         "T": 10
     }
     if (value := card_values.get(card)) is not None:
@@ -56,8 +56,14 @@ class Hand:
 
     def get_type(self):
         if self.figure is None:
-            counter = list(Counter(self.cards).values())
+            normal_cards = [c for c in self.cards if c != "J"]
+            jokers = self.cards.count("J")
+            counter = list(Counter(normal_cards).values())
             figure = sorted(counter, reverse=True)
+            if jokers != 5:
+                figure[0] += jokers
+            else:
+                figure = [5]
             self.figure = get_figure(figure)
         return self.figure
 
