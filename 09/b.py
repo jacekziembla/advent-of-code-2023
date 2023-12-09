@@ -28,8 +28,8 @@ for line in lines:
     extra_element = 0
     for i in range(len(rows)):
         current_row = rows[-1 - i]
-        extra_element = current_row[-1] + extra_element
-        current_row.append(extra_element)
+        extra_element = current_row[0] - extra_element
+        current_row.insert(0, extra_element)
     counter += extra_element
 
 print(counter)
