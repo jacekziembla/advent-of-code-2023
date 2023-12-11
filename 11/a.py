@@ -4,6 +4,9 @@ from dataclasses import dataclass
 with open("11/input.txt", "r") as file:
     lines = file.read().splitlines()
 
+DIFF = 1 # PART A
+DIFF = 999999 # PART B
+
 rows_to_expand = []
 columns_to_expand = []
 for index, row in enumerate(lines):
@@ -32,10 +35,10 @@ class Point:
         extra_dist = 0
         for row in rows_to_expand:
             if self.x < row < other.x:
-                extra_dist += 1
+                extra_dist += DIFF
         for col in columns_to_expand:
             if self.y < col < other.y:
-                extra_dist += 1
+                extra_dist += DIFF
         return normal_dist + extra_dist * 2
 
 
@@ -55,3 +58,5 @@ for p1 in range(1, i):
         distances.append(diff)
 
 print(int(sum(distances) / 2))
+
+
